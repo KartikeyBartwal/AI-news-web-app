@@ -1,4 +1,4 @@
-# AI News Web App
+# News Web App
 
 ### Terminal Style - README.md
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-**AI News Web App** is a frontend application designed to deliver the latest news articles in a visually appealing and organized manner. The app fetches news from various APIs and presents the information cleanly and intuitively. Users can browse news by category, search for specific topics, and enjoy a smooth, responsive experience. The app is built using plain HTML, CSS, and JavaScript, ensuring lightweight performance without relying on any frameworks.
+**News Web App** is a frontend application designed to deliver the latest news articles in a visually appealing and organized manner. The app fetches news from various APIs and presents the information cleanly and intuitively. Users can browse news by category, search for specific topics, and enjoy a smooth, responsive experience. The app is built using plain HTML, CSS, and JavaScript, ensuring lightweight performance without relying on any frameworks.
 
 ---
 
