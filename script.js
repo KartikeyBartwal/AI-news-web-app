@@ -106,3 +106,10 @@ function displayNews(articles) {
     updatePaginationControls();
     updateArticleCount();
 }
+
+function updatePaginationControls() {
+    currentPageSpan.textContent = currentPage;
+    totalPagesSpan.textContent = totalPages;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+}
