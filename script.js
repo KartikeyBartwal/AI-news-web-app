@@ -16,7 +16,6 @@ let currentPage = 1;
 let totalPages = 1;
 let currentQuery = 'Apple';
 
-// Function to fetch news
 async function fetchNews(query = 'Apple', page = 1, pageSize = 20) {
     const url = `${baseUrl}?q=${query}&sortBy=popularity&apiKey=${apiKey}&pageSize=${pageSize}&page=${page}`;
     
@@ -29,4 +28,34 @@ async function fetchNews(query = 'Apple', page = 1, pageSize = 20) {
         console.error('Error fetching news:', error);
         return [];
     }
+}
+
+function processArticles(articles) {
+    return articles.filter(article => {
+        if (!article.title || !article.description || !article.url) {
+            return false;
+        }
+
+        if (article.title.toLowerCase().includes('removed') || 
+            article.description.toLowerCase().includes('removed') ||
+            article.title.trim() === '' || 
+            article.description.trim() === '') {
+            return false;
+        }
+
+        // Try to extract an image from the content if urlToImage is not provided
+        if (!article.urlToImage && article.content) {
+            const imgMatch = article.content.match(/<img[^>]+src="?([^"\s]+)"?\s*/);
+            if (imgMatch) {
+                article.urlToImage = imgMatch[1];
+            }
+        }
+
+        // If still no image, use a more appealing placeholder
+        if (!article.urlToImage) {
+            article.urlToImage = `https://source.unsplash.com/300x200/?${encodeURIComponent(article.title)}`;
+        }
+
+        return true;
+    });
 }
