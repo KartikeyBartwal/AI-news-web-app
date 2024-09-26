@@ -113,3 +113,13 @@ function updatePaginationControls() {
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === totalPages;
 }
+
+function updateArticleCount() {
+    articleCountSpan.textContent = globalArticleCount;
+}
+
+async function loadNews() {
+    newsContainer.innerHTML = '<p>Loading news...</p>';
+    const articles = await fetchNews(currentQuery, currentPage);
+    displayNews(articles);
+}
