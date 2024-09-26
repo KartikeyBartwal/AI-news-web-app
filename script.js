@@ -59,3 +59,50 @@ function processArticles(articles) {
         return true;
     });
 }
+
+function displayNews(articles) {
+    newsContainer.innerHTML = '';
+
+    if (articles.length === 0) {
+        newsContainer.innerHTML = '<p>No valid news articles found. Please try a different search or page.</p>';
+        globalArticleCount = 0;
+        return;
+    }
+
+    globalArticleCount = articles.length;
+
+    articles.forEach(article => {
+        const articleElement = document.createElement('article');
+        articleElement.classList.add('article');
+
+        articleElement.innerHTML = `
+            <div class="image-container">
+                <div class="image-placeholder"></div>
+                <img src="${article.urlToImage}" alt="${article.title}" class="article-image hidden">
+            </div>
+            <div class="article-content">
+                <h2>${article.title}</h2>
+                <p>${article.description}</p>
+                <p class="source">Source: ${article.source.name}</p>
+                <a href="${article.url}" target="_blank" class="read-more">Read more</a>
+            </div>
+        `;
+
+        const img = articleElement.querySelector('.article-image');
+        const placeholder = articleElement.querySelector('.image-placeholder');
+
+        img.onload = () => {
+            placeholder.style.display = 'none';
+            img.classList.remove('hidden');
+        };
+
+        img.onerror = () => {
+            img.src = `https://source.unsplash.com/300x200/?${encodeURIComponent(article.title)}`;
+        };
+
+        newsContainer.appendChild(articleElement);
+    });
+
+    updatePaginationControls();
+    updateArticleCount();
+}
