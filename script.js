@@ -133,3 +133,10 @@ searchForm.addEventListener('submit', async (e) => {
         await loadNews();
     }
 });
+
+prevPageBtn.addEventListener('click', async () => {
+    if (currentPage > 1) {
+        currentPage--;
+        await loadNews();
+    }
+});
