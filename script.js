@@ -140,3 +140,21 @@ prevPageBtn.addEventListener('click', async () => {
         await loadNews();
     }
 });
+
+nextPageBtn.addEventListener('click', async () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+        await loadNews();
+    }
+});
+
+// Add these variables and functions to your existing script.js file
+let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+const bookmarksContainer = document.getElementById('bookmarks-container');
+const homeLink = document.getElementById('home-link');
+const bookmarksLink = document.getElementById('bookmarks-link');
+
+// Function to save bookmarks to localStorage
+function saveBookmarks() {
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+}
