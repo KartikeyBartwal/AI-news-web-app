@@ -123,3 +123,13 @@ async function loadNews() {
     const articles = await fetchNews(currentQuery, currentPage);
     displayNews(articles);
 }
+
+searchForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = searchInput.value.trim();
+    if (query) {
+        currentQuery = query;
+        currentPage = 1;
+        await loadNews();
+    }
+});
